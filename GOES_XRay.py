@@ -49,18 +49,18 @@ print(times_dt)
 ept = 1
 
 # Create a figure with 4 vertical subplots sharing the x-axis
-fig, axs = plt.subplots(3, 1, figsize=(12, 10), sharex=True)
+fig, axs = plt.subplots(2, 1, figsize=(12, 10), sharex=True)
 
 # Plot each variable in its own subplot
-axs[0].plot(times_dt, flux[0:elem,ept]*1000, color='blue')
-axs[0].set_ylabel('Flux')
-axs[0].set_title('GOES Magnetometer Data (1 Day)')
+axs[0].plot(times_dt, np.log10(flux[0:elem,ept]), color='blue')
+axs[0].set_ylabel(r'Flux ($Log_{10}$)')
+axs[0].set_title('GOES X-Ray Flux')
 
-axs[1].plot(times_dt, obs_flux[0:elem,ept]*1000, color='orange')
-axs[1].set_ylabel('Observed Flux')
+axs[1].plot(times_dt, np.log10(obs_flux[0:elem,ept]), color='orange')
+axs[1].set_ylabel(r'Observed Flux ($Log_{10}$)')
 
-axs[2].plot(times_dt, electron_correction[0:elem,ept], color='green')
-axs[2].set_ylabel('Electron Correction')
+# axs[2].plot(times_dt, electron_correction[0:elem,ept], color='green')
+# axs[2].set_ylabel('Electron Correction')
 
 # axs[3].plot(times_dt, energy, color='red')
 # axs[3].set_ylabel('Energy')
@@ -69,9 +69,9 @@ axs[2].set_ylabel('Electron Correction')
 # Format the x-axis dates
 locator = mdates.AutoDateLocator(minticks=6, maxticks=12)
 formatter = mdates.ConciseDateFormatter(locator)
-axs[2].xaxis.set_major_locator(locator)
-axs[2].xaxis.set_major_formatter(formatter)
-axs[2].tick_params(axis='x', rotation=90)
+axs[1].xaxis.set_major_locator(locator)
+axs[1].xaxis.set_major_formatter(formatter)
+axs[1].tick_params(axis='x', rotation=90)
 
 plt.tight_layout()
 plt.show(block=True)

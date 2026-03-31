@@ -44,7 +44,7 @@ times_dt = [
     for t in times[:, 0]
 ]
 times_dt = [t for t in times_dt if t is not None]
-print(times_dt)
+# print(times_dt)
 
 ept = 1
 
